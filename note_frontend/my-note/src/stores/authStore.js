@@ -72,7 +72,7 @@ const authStore = create((set) => ({
    LogOut: async()=>
    {
     try{
-        await axios.get("/logout")
+        await axios.get("/logout",{withCredentials:true})
         set({loggedIn:false});
     }catch(err)
     {
@@ -88,6 +88,13 @@ const authStore = create((set) => ({
     {
         console.log("signUp Error:",err)
     }
+    set({
+        SignupForm:{
+            email:"",
+            Password:"",
+            ConfirmPassword:"",
+        }
+    })
    }
 }));
 

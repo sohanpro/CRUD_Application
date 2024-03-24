@@ -29,7 +29,7 @@ export default function SignUpForm() {
       const timer = setTimeout(()=>
       {
         navigate("/login");
-      },1000);
+      },2000);
       return ()=>clearTimeout(timer)
     }
   },[signUpSuccess,navigate])
@@ -50,7 +50,7 @@ export default function SignUpForm() {
                 type="text"
                 name="email"
                 value={store.SignupForm.email}
-                placeholder="Email"
+                placeholder="Username"
                 required
               />
               <input

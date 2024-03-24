@@ -1,28 +1,21 @@
-import { useState } from "react";
-import "./AllNotes.css"
 import useNoteStore from "../stores/noteStore";
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js" integrity="sha512-cJMgI2OtiquRH4L9u+WQW+mz828vmdp9ljOcm/vKTQ7+ydQUktrPVewlykMgozPP+NUBbHdeifE6iJ6UVjNw5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+import "./AllNotes.css"; // Import the CSS file
+
 export default function Note({ note }) {
-  const [isDeleted, setIsDeleted] = useState(false);
   const store = useNoteStore((store) => ({
     Deletenote: store.Deletenote,
     toggleUpdate: store.toggleUpdate,
   }));
 
-  const handleDelete = async () => {
-    setIsDeleted(true);
-    await store.Deletenote(note._id);
-  };
-
   return (
-    <div key={note._id} className={`note-card ${isDeleted ? "deleted" : ""}`}>
+    <div className={`note-card ${note.deleted ? "deleted" : ""}`}> {/* Apply the note-card class with condition */}
       <div className="note-header">
         <h3 className="note-title">{note.title}</h3>
         <div className="note-buttons">
-          <button onClick={handleDelete} className="delete-btn">
+          <button onClick={() => store.Deletenote(note._id)} className="delete-btn"> {/* Apply the delete-btn class */}
             Delete
           </button>
-          <button onClick={() => store.toggleUpdate(note)} className="update-btn">
+          <button onClick={() => store.toggleUpdate(note)} className="update-btn"> {/* Apply the update-btn class */}
             Update
           </button>
         </div>
